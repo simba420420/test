@@ -69,12 +69,12 @@ public class Example2 {
                 c = "bandit";
                 break;
             } else if (ch2.equals("archer")) {
-                mv.add("longbow shot");
+                mv.add("longbow");
                 mv.add("rapid shots");
                 mv.add("explosive shot");
                 mv.add("long shot");
                 System.out.println("your new moves as a archer are");
-                System.out.println("longbow shot");
+                System.out.println("longbow");
                 System.out.println("rapid shots");
                 System.out.println("explosive shot");
                 System.out.println("long shot");
@@ -150,6 +150,7 @@ public class Example2 {
         String move = scan.nextLine();
         double md = 10;
         int buff = 0;
+        double edmg = 20;
         boolean shield = false;
         if (c.equals("mage")) {
             if (move.equals("auto shields") || move.equals("2")) {
@@ -183,8 +184,7 @@ public class Example2 {
                 md = md - 5;
 
             }
-        }
-        else if (c.equals("bandit")) {
+        } else if (c.equals("bandit")) {
             if (move.equals("speed blitz")) {
                 md = md - 5;
                 hp1 = hp1 - md;
@@ -196,27 +196,63 @@ public class Example2 {
                 System.out.print("you hit them for a total of " + md * 3);
                 System.out.print(" dmg");
                 System.out.println("");
-            }
-            else if (move.equals("song")) {
-                if (buff >= 3) {
+            } else if (move.equals("song")) {
+                if (buff >= 1) {
                     System.out.println("you can only use this buff 3 times please do another move");
-                }
-                else if (buff < 3) {
+                } else if (buff < 1) {
                     System.out.println("you feel stronger you will deal a extra 1.3x dmg but you take 1.5x more dmg now");
+                    md = md * 1.3;
+                    edmg *= 1.5;
+                    System.out.println(edmg);
+                    System.out.println("work");
+
                 }
-            }
-            else if (move.equals("rock throw")) {
+            } else if (move.equals("rock throw")) {
                 System.out.println("you sling a rock into the air it will come down next move and deal 20 dmg but you will take 1.5 more dmg now");
+            } else if (move.equals("dodge")) {
+                System.out.println("you will take no dmg next turn");
             }
-            else if (move.equals("dodge"));
-            System.out.println("you will take no dmg next turn");
         }
-        if (c.equals("archer")) {
+            /*
+        } else if (ch2.equals("archer")) {
+            System.out.println("your new moves as a archer are");
+            System.out.println("longbow shot");
+            System.out.println("rapid shots");
+            System.out.println("explosive shot");
+            System.out.println("long shot");
+            */
 
+                else if (c.equals("archer")) {
+                    if (move.equals("longbow")) {
+                        if (buff <= 2) {
+                            int shot = 1;
+                            System.out.println("you shot your longbow only " + shot + " arrows left");
+                            md += 25;
+                            hp1 = hp1 - md;
+                            System.out.println("you dealt " + md);
+                            System.out.print("dmg");
+                            md -= 25;
+                            shot = shot - buff;
+                            shot++;
+                        }
+                        else if (buff >= 2) {
+                            System.out.println("sorry you have no more longbow arrows left");
+                        }
 
+            }
+                    else if (move.equals("rapid shots")) {
+                        md -= 5;
+                        hp1 = hp1 - md * 5;
+                        System.out.println("you shot them 5 times dealing " + md * 5 + " dmg");
+                        md += 5;
+                    }
+                    else if (move.equals("explosive shot")) {
+                        
+                    }
         }
     }
 }
+
 
 
 
