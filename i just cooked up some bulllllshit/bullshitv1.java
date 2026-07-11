@@ -1,17 +1,20 @@
-import java.awt.*;
 import java.util.*;
-import javax.swing.*;
 
 public class bullshitv1 {
     // the home screen
+
     public static void main(String[] args) {
+        menu();
+    }
+    public static void menu() {
         Scanner scan = new Scanner(System.in);
+        int turd = 1;
+
         System.out.println("user? ");
         String userName = scan.nextLine();
         if (userName.equals("s")) {
-            rpg_Fight();
-        }
-        else {
+            rpg_Fight(turd);
+        } else {
             System.out.print("hello " + userName);
             System.out.println(" what action would you like to do?");
         }
@@ -24,9 +27,27 @@ public class bullshitv1 {
         //i will use this in the final version it just takes to long to get to what im working
 
         //}
-    //this is the main game
+        //this is the main game
     }
-    public static void rpg_Fight() {
+public static void turncalc(int turd) {
+    int i = 1;
+
+    for (;;) {
+        if ((i % 2) == 1 && (i > -1)) {
+            i++;
+            turd = 1;
+            break;
+        }
+        else if ((i % 2) == 0 && (i > -1)) {
+            i++;
+            turd = 0;
+            break;
+        }
+    }
+}
+
+    public static void rpg_Fight(int turd) {
+
         Scanner scan = new Scanner(System.in);
         double hp = 90;
         double hp1 = 120;
@@ -42,7 +63,7 @@ public class bullshitv1 {
         System.out.println("type the name of what you want to be");
         String ch2 = scan.nextLine();
 
-        for (;;) {
+        for (; ; ) {
             if (ch2.equals("mage")) {
                 mv.add("over head spears");
                 mv.add("auto shields");
@@ -68,12 +89,12 @@ public class bullshitv1 {
                 c = "bandit";
                 break;
             } else if (ch2.equals("archer")) {
-                mv.add("longbow shot");
+                mv.add("longbow");
                 mv.add("rapid shots");
                 mv.add("explosive shot");
                 mv.add("long shot");
                 System.out.println("your new moves as a archer are");
-                System.out.println("longbow shot");
+                System.out.println("longbow");
                 System.out.println("rapid shots");
                 System.out.println("explosive shot");
                 System.out.println("long shot");
@@ -104,8 +125,7 @@ public class bullshitv1 {
                 c = "tank";
                 hp = 170;
                 break;
-            }
-            else {
+            } else {
                 System.out.println("sorry that is not a class please choose a class");
             }
         }
@@ -119,57 +139,157 @@ public class bullshitv1 {
             System.out.print("the knight has " + hp1);
             System.out.print("hp");
             System.out.println("");
-            System.out.println("you have " + hp );
+            System.out.println("you have " + hp);
             System.out.println("what would you like to do");
             System.out.println("info:");
             System.out.println("start fight: ");
             System.out.println("(its recommend to check your moves as you cannot go back after this)");
-            String move = scan.nextLine();
-            for (;;){
-                if (move.equals("info")) {
-                    if (c .equals("mage")) {
-                        System.out.println(mv);
 
+            for (; ; ) {
+                String move = scan.nextLine();
+                if (move.equals("info")) {
+                    if (c.equals("mage")) {
+                        System.out.println(mv);
+                        System.out.println("mid");
                     }
-                else if (move.equals("start fight")) {
-                    magedmg(hp, hp1);
+                } else if (move.equals("start fight")) {
+
+                    magedmg(hp, hp1, c, turd);
+                    break;
                 }
 
             }
+
+
         }
-
-
     }
-        }
+
     // the math for all of the fighting
-    public static void magedmg( double hp, double hp1) {
+    public static void magedmg(double hp, double hp1, String c, int turn) {
         Scanner scan = new Scanner(System.in);
         System.out.println("what is your move");
         String move = scan.nextLine();
         double md = 10;
-        if (move.equals("auto shields")|| move.equals("2")) {
-            hp = hp + 40;
-        }
-        else if (move.equals("pure magic")|| move.equals("3")) {
-            md = md + 15;
-            hp1 = hp1 - md;
-            md = md - 15;
-            System.out.println(hp1);
-        }
-        else if (move.equals("bless me gods")|| move.equals("4")) {
-            md = md * 1.1;
+        int buff = 0;
+        double edmg = 20;
+        boolean shield = false;
+        if (c.equals("mage")) {
+            if (move.equals("auto shields") || move.equals("2")) {
 
-        }
-        else if (move.equals("over head spears")||move.equals("1")) {
-            md = md + 5;
-            hp1 = hp1 - md;
-            md = md - 5;
+                if (shield == true) {
+                    System.out.println("you can only use this once please choose another move");
+                } else if (shield == false) {
+                    hp = hp + 40;
+                    System.out.println("you feel stronger + 40 hp");
+                    shield = true;
+                }
+            } else if (move.equals("pure magic") || move.equals("3")) {
+                md = md + 15;
+                hp1 = hp1 - md;
+                System.out.print("you did " + md);
+                System.out.print(" dmg");
+                System.out.println("");
+                md = md - 15;
+            } else if (move.equals("bless me gods") || move.equals("4")) {
+                if (buff >= 10) {
+                    System.out.println("you can only use this buff 10 times please do another move");
+                } else if (buff < 10) {
+                    md = md * 1.1;
+                    System.out.println("you feel stronger you will deal 1.1x more dmg now");
+                    buff++;
+                }
 
+            } else if (move.equals("over head spears") || move.equals("1")) {
+                md = md + 5;
+                hp1 = hp1 - md;
+                md = md - 5;
+
+            }
+        } else if (c.equals("bandit")) {
+            if (move.equals("speed blitz")) {
+                md = md - 5;
+                hp1 = hp1 - md;
+                System.out.println("you hit them once");
+                hp1 = hp1 - md;
+                System.out.println("you hit them twice");
+                hp1 = hp1 - md;
+                System.out.println("you hit them three times");
+                System.out.print("you hit them for a total of " + md * 3);
+                System.out.print(" dmg");
+                System.out.println("");
+            } else if (move.equals("song")) {
+                if (buff >= 1) {
+                    System.out.println("you can only use this buff 3 times please do another move");
+                } else if (buff < 1) {
+                    System.out.println("you feel stronger you will deal a extra 1.3x dmg but you take 1.5x more dmg now");
+                    md = md * 1.3;
+                    edmg *= 1.5;
+                    System.out.println(edmg);
+                    System.out.println("work");
+
+                }
+            } else if (move.equals("rock throw")) {
+                System.out.println("you sling a rock into the air it will come down next move and deal 20 dmg but you will take 1.5 more dmg now");
+            } else if (move.equals("dodge")) {
+                System.out.println("you will take no dmg next turn");
+            }
+        }
+            /*
+            System.out.println("long shot");
+            */
+
+        else if (c.equals("archer")) {
+            if (move.equals("longbow")) {
+                if (buff <= 2) {
+                    int shot = 1;
+                    System.out.println("you shot your longbow only " + shot + " arrows left");
+                    md += 25;
+                    hp1 = hp1 - md;
+                    System.out.println("you dealt " + md);
+                    System.out.print("dmg");
+                    md -= 25;
+                    shot = shot - buff;
+                    shot++;
+                }
+                else if (buff >= 2) {
+                    System.out.println("sorry you have no more longbow arrows left");
+                }
+
+            }
+            else if (move.equals("rapid shots")) {
+                md -= 5;
+                hp1 = hp1 - md * 5;
+                System.out.println("you shot them 5 times dealing " + md * 5 + " dmg");
+                md += 5;
+            }
+            else if (move.equals("explosive shot")) {
+
+            }
         }
     }
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // hello this is the dump all the old code i might use in the future
 //  Scanner scan = new Scanner(System.in);
 //        if (dev_true == true) {
