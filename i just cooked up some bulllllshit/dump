@@ -1,0 +1,63 @@
+
+// hello this is the dump all the old code i might use in the future
+//  Scanner scan = new Scanner(System.in);
+//        if (dev_true == true) {
+//            System.out.println("since you are a dev you will have maxxed stats");
+//        }
+//        else {
+//            System.out.println("you will have 300 stat points each stat takes 100 to max");
+//            System.out.println("type the name of the stat and then after how many points you want to put in");
+//        }
+//        int sp1 = 300;
+//        int speedStat = 0;
+//        int health = 0;
+//        int mp = 0;
+//        int magic = 0;
+//        System.out.println("stats:");
+//        System.out.println("speed");
+//        System.out.println("strength");
+//        System.out.println("health");
+//        System.out.println("magic power");
+//        System.out.println("magic defense");
+//        System.out.println("what stat would you like to do first? :");
+//        String userInp = scan.nextLine();
+//so i wanted to use this at first but instead i will use it at some point in the future
+//
+/*import java.awt.*;
+        import java.awt.event.ActionListener;
+import java.util.*;
+        import javax.swing.*;
+public class GUI{
+    public GUI(){
+        JFrame frame = new JFrame();
+        JButton button = new JButton("click me");
+        JPasswordField tip = new JPasswordField();
+        JLabel label = new JLabel("you like it when i like you like that dont you");
+
+        JPanel panel = new JPanel();
+        panel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
+        panel.setLayout(new GridLayout());
+        panel.add(button);
+        panel.add(label);
+        panel.add(tip);
+
+
+
+        frame.add(panel, BorderLayout.CENTER);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("huh");
+        frame.pack();
+        frame.setVisible(true);
+
+
+        if (tip.equals(true)) {
+            System.out.println("huh2");
+        }
+    }
+    public static void main(String[] args ){
+
+    }
+
+
+*/
+// lil gui stuff wrong file type might use it later
