@@ -79,12 +79,12 @@ public class Example2 {
                 mv.add("longbow");
                 mv.add("rapid shots");
                 mv.add("explosive shot");
-                mv.add("long shot");
+                mv.add("homing arrows");
                 System.out.println("your new moves as a archer are");
                 System.out.println("longbow");
                 System.out.println("rapid shots");
                 System.out.println("explosive shot");
-                System.out.println("long shot");
+                System.out.println("homing arrows");
                 c = "archer";
                 break;
             } else if (ch2.equals("bersker")) {
@@ -103,7 +103,7 @@ public class Example2 {
                 mv.add("fall");
                 mv.add("laugh");
                 mv.add("punch");
-                mv.add("kick");
+                mv.add("getting real");
                 System.out.println("your new moves as a tank are");
                 System.out.println("fall");
                 System.out.println("laugh");
@@ -133,24 +133,32 @@ public class Example2 {
             System.out.println("info:");
             System.out.println("start fight: ");
             System.out.println("(its recommend to check your moves as you cannot go back after this)");
-
             for (; ; ) {
                 String move = scan.nextLine();
                 if (move.equals("info")) {
                     if (c.equals("mage")) {
                         System.out.println(mv);
-                        System.out.println("mid");
+                    }
+                    else if (c.equals("bandit")) {
+                        System.out.println(mv);
+                    }
+                    else if (c.equals("bandit")) {
+                        System.out.println(mv);
+                    }
+                    else if (c.equals("archer")) {
+                        System.out.println(mv);
+                    }
+                    else if (c.equals("bersker")) {
+                        System.out.println(mv);
+                    }
+                    else if (c.equals("tank")) {
+                        System.out.println(mv);
                     }
                 } else if (move.equals("start fight")) {
                     turncalc(hp, hp1, c);
-
-
                     break;
                 }
-
             }
-
-
         }
     }
     public static void turncalc(double hp, double hp1, String c) {
@@ -166,7 +174,7 @@ public class Example2 {
                     break;
                 } else if ((i % 2) == 0 && (i > -1)) {
                     i++;
-                    edmg();
+                    edmg(hp, hp1);
                     break;
                 }
             }
@@ -175,6 +183,7 @@ public class Example2 {
     // the math for all of the fighting
     public static void magedmg(double hp, double hp1, String c) {
         Scanner scan = new Scanner(System.in);
+        System.out.println("you can also use numbers to use your move");
         System.out.println("what is your move");
         String move = scan.nextLine();
         double md = 10;
@@ -188,7 +197,7 @@ public class Example2 {
         int mr_peabody = (int) (Math.random() * 3 + 1);
         if (c.equals("mage")) {
             if (move.equals("auto shields") || move.equals("2")) {
-
+                System.out.println("your using " + move);
                 if (shield == true) {
                     System.out.println("you can only use this once please choose another move");
                 } else if (shield == false) {
@@ -197,6 +206,7 @@ public class Example2 {
                     shield = true;
                 }
             } else if (move.equals("pure magic") || move.equals("3")) {
+                System.out.println("your using " + move);
                 md = md + 15;
                 hp1 = hp1 - md;
                 System.out.print("you did " + md);
@@ -204,6 +214,7 @@ public class Example2 {
                 System.out.println("");
                 md = md - 15;
             } else if (move.equals("bless me gods") || move.equals("4")) {
+                System.out.println("your using " + move);
                 if (buff >= 10) {
                     System.out.println("you can only use this buff 10 times please do another move");
                 } else if (buff < 10) {
@@ -213,13 +224,15 @@ public class Example2 {
                 }
 
             } else if (move.equals("over head spears") || move.equals("1")) {
+                System.out.println("your using " + move);
                 md = md + 5;
                 hp1 = hp1 - md;
                 md = md - 5;
 
             }
         } else if (c.equals("bandit")) {
-            if (move.equals("speed blitz")) {
+            if (move.equals("speed blitz") || move.equals("1")) {
+                System.out.println("your using " + move);
                 md = md - 5;
                 hp1 = hp1 - md;
                 System.out.println("you hit them once");
@@ -230,7 +243,8 @@ public class Example2 {
                 System.out.print("you hit them for a total of " + md * 3);
                 System.out.print(" dmg");
                 System.out.println("");
-            } else if (move.equals("song")) {
+            } else if (move.equals("song") || move.equals("2")) {
+                System.out.println("your using " + move);
                 if (buff >= 1) {
                     System.out.println("you can only use this buff 3 times please do another move");
                 } else if (buff < 1) {
@@ -241,13 +255,15 @@ public class Example2 {
                     System.out.println("work");
 
                 }
-            } else if (move.equals("rock throw")) {
+            } else if (move.equals("rock throw") || move.equals("3")) {
+                System.out.println("your using " + move);
                 System.out.println("you sling a rock into the air it will come down next move and deal 20 dmg but you will take 1.5 more dmg now");
-            } else if (move.equals("dodge")) {
+            } else if (move.equals("dodge") || move.equals("4")) {
                 System.out.println("you will take no dmg next turn");
             }
         } else if (c.equals("archer")) {
-            if (move.equals("longbow")) {
+            if (move.equals("longbow") || move.equals("1")) {
+                System.out.println("your using " + move);
                 if (buff <= 2) {
                     int shot = 1;
                     System.out.println("you shot your longbow only " + shot + " arrows left");
@@ -262,12 +278,14 @@ public class Example2 {
                     System.out.println("sorry you have no more longbow arrows left");
                 }
 
-            } else if (move.equals("rapid shots")) {
+            } else if (move.equals("rapid shots") || move.equals("2")) {
+                System.out.println("your using " + move);
                 md -= 5;
                 hp1 = hp1 - md * 5;
                 System.out.println("you shot them 5 times dealing " + md * 5 + " dmg");
                 md += 5;
-            } else if (move.equals("explosive shot")) {
+            } else if (move.equals("explosive shot") || move.equals("3")) {
+                System.out.println("your using " + move);
                 md += 15;
                 hp1 = hp1 - md;
                 int portal_transmission = (int) (Math.random() * 10) + 1;
@@ -281,10 +299,20 @@ public class Example2 {
                 System.out.print(" dmg");
                 System.out.println("");
                 md -= 15;
+            } else if (move.equals("homing arrows") || move.equals("4")) {
+                System.out.println("your using " + move);
+                System.out.print("your arrow pireced though them dealing" + md);
+                System.out.print("dmg");
+                System.out.println("");
+                System.out.println("your arrow will come back in 2 rounds");
+                hp1 = hp1 - md;
+                System.out.println("rest of move wip");
+
             }
         } else if (c.equals("bersker")) {
+            System.out.println("your using " + move);
             md += 6.6666666666666666666666666;
-            if (move.equals("wild strikes")) {
+            if (move.equals("wild strikes") || move.equals("1")) {
                 System.out.println("you hit them once");
                 System.out.println("you hit them twice");
                 System.out.println("you hit them three times");
@@ -296,7 +324,8 @@ public class Example2 {
                 md = md - hp;
                 md = md / 3;
                 System.out.println("you striked a bit too wild and hit yourself as well for " + md * 2.4);
-            } else if (move.equals("axe throw")) {
+            } else if (move.equals("axe throw") || move.equals("2")) {
+                System.out.println("your using " + move);
                 System.out.println("you threw your axe at them");
                 if (miss == 1) {
                     mr_peabody = (int) (Math.random() * 2 + 1);
@@ -318,81 +347,108 @@ public class Example2 {
                     md += 25;
                     hp1 = hp1 - md;
                 }
-            } else if (move.equals("bersker rage") && buff >= 1) {
+            } else if (move.equals("bersker rage") && buff >= 1 || move.equals("3") && buff >= 1) {
+                System.out.println("your using " + move);
                 System.out.println("your enraged now you will miss more often but deal 15 more dmg");
                 miss = 1;
                 md += 15;
             } else if (move.equals("bersker rage") && buff <= 1) {
                 System.out.println("you can only use this buff one time please do another move");
+            } else if (move.equals("heavy blow") || move.equals("4")) {
+                if (miss == 1) {
+                    System.out.println("your using " + move);
+                    md += 25;
+                    System.out.print("you dealt " + md);
+                    System.out.print("dmg");
+                    System.out.println("");
+                }
+                else{
+                    System.out.println("you need to be enraged to use this");
+                }
             }
-                /*
-                                System.out.println("your new moves as a tank are");
-                System.out.println("fall");
-                System.out.println("laugh");
-                System.out.println("punch");
-                System.out.println("getting real");
-                 */
-        } else if (c.equals("tank")) {
-        } else if (move.equals("stonewall")) {
-            if (buff2 == 1) {
-                System.out.println("you got 50 hp for the next 4 turns");
-                hp = +50;
-                buff++;
-            } else {
-                System.out.println("you can only use this buff 1 time");
-            }
-        } else if (move.equals("glare")) {
-            System.out.println("you glared at them scaring them they deal 5 less dmg now");
-            edmg -= 5;
-        } else if (move.equals("calming music")) {
-            System.out.println("the music calmed you down");
-            atlas = false;
-        }
 
-        if (move.equals("fall")) {
-            System.out.print("you fell on them dealing " + md);
-            System.out.print(" dmg");
-            System.out.println("");
-            hp1 = hp1 - md;
-        } else if (move.equals("laugh")) {
-            if (buff <= 2) {
-                System.out.println("you laugh giving you 10 more hp");
-                buff++;
-                hp += 10;
-            } else {
-                System.out.println("you can only use this buff 3 times please do another move");
-            }
-        } else if (move.equals("punch")) {
-            System.out.println("you hit them for " + md);
-            hp1 = hp1 - md;
-        } else if (move.equals("getting real")) {
-            atlas = true;
         }
-        if (atlas == true) {
-            System.out.println("you have new moves");
-            System.out.println("bash");
-            System.out.println("stonewall");
-            System.out.println("glare");
-            System.out.println("calming music");
-            if (move.equals("bash")) {
-                md += 10;
-                System.out.print("you rushed foward and bashed into them dealing " + md);
-                System.out.print("dmg ");
+        else if (c.equals("tank")) {
+
+            if (move.equals("stonewall")) {
+                System.out.println("your using " + move);
+                if (buff2 == 1) {
+                    System.out.println("you got 50 hp for the next 4 turns");
+                    hp = +50;
+                    buff++;
+                } else {
+                    System.out.println("you can only use this buff 1 time");
+                }
+            } else if (move.equals("glare")) {
+                System.out.println("your using " + move);
+                System.out.println("you glared at them scaring them they deal 5 less dmg now");
+                edmg -= 5;
+            } else if (move.equals("calming music")) {
+                System.out.println("your using " + move);
+                System.out.println("the music calmed you down");
+                atlas = false;
+            }
+
+            if (move.equals("fall")) {
+                System.out.println("your using " + move);
+                System.out.print("you fell on them dealing " + md);
+                System.out.print(" dmg");
                 System.out.println("");
                 hp1 = hp1 - md;
-                md -= 10;
+            } else if (move.equals("laugh")) {
+                System.out.println("your using " + move);
+                if (buff <= 2) {
+                    System.out.println("you laugh giving you 10 more hp");
+                    buff++;
+                    hp += 10;
+                } else {
+                    System.out.println("you can only use this buff 3 times please do another move");
+                }
+            } else if (move.equals("punch")) {
+                System.out.println("your using " + move);
+                System.out.println("you hit them for " + md);
+                hp1 = hp1 - md;
+            } else if (move.equals("getting real")) {
+                System.out.println("your using " + move);
+                atlas = true;
+            }
+            if (atlas == true) {
+                System.out.println("you have new moves");
+                System.out.println("bash");
+                System.out.println("stonewall");
+                System.out.println("glare");
+                System.out.println("calming music");
+                if (move.equals("bash")) {
+                    System.out.println("your using " + move);
+                    md += 10;
+                    System.out.print("you rushed foward and bashed into them dealing " + md);
+                    System.out.print("dmg ");
+                    System.out.println("");
+                    hp1 = hp1 - md;
+                    md -= 10;
+                }
             }
         }
     }
     public static void edmg(double hp, double hp1) {
-        int iwabd = (int) (Math.random() * 5 + 1);
-        int iwabi = (int) (Math.random() * 2 + 1);
-        int iwagd = (int) (Math.random() * 2.5 + 20);
-        hp = hp - iwagd;
-        if (iwabd == 1) {
-            hp1 = hp1 - iwagd - 
+        int iwabd = (int) (Math.random() * 6 + 1);
+        // this is the chance for a effect
+        int bendy = (int) (Math.random() * 10 + 1);
+        // chancce for a buff
+        double iwagd = (int) (Math.random() * 2.5 + 20);
+        // this is the acutal edmg
+        if (bendy == 1) {
+            iwagd = iwagd / 2.3;
+            iwagd = iwagd * 1.5;
         }
-    
+        hp = hp - iwagd;
+        System.out.print("they hit you for " + iwagd);
+        System.out.print("dmg");
+        System.out.println("");
+        if (iwabd == 1) {
+            hp1 = hp1 - iwagd;
+        }
+
     }
 
 }
@@ -416,66 +472,3 @@ public class Example2 {
 
 
 
-
-// hello this is the dump all the old code i might use in the future
-//  Scanner scan = new Scanner(System.in);
-//        if (dev_true == true) {
-//            System.out.println("since you are a dev you will have maxxed stats");
-//        }
-//        else {
-//            System.out.println("you will have 300 stat points each stat takes 100 to max");
-//            System.out.println("type the name of the stat and then after how many points you want to put in");
-//        }
-//        int sp1 = 300;
-//        int speedStat = 0;
-//        int health = 0;
-//        int mp = 0;
-//        int magic = 0;
-//        System.out.println("stats:");
-//        System.out.println("speed");
-//        System.out.println("strength");
-//        System.out.println("health");
-//        System.out.println("magic power");
-//        System.out.println("magic defense");
-//        System.out.println("what stat would you like to do first? :");
-//        String userInp = scan.nextLine();
-//so i wanted to use this at first but instead i will use it at some point in the future
-//
-/*import java.awt.*;
-        import java.awt.event.ActionListener;
-import java.util.*;
-        import javax.swing.*;
-public class GUI{
-    public GUI(){
-        JFrame frame = new JFrame();
-        JButton button = new JButton("click me");
-        JPasswordField tip = new JPasswordField();
-        JLabel label = new JLabel("you like it when i like you like that dont you");
-
-        JPanel panel = new JPanel();
-        panel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
-        panel.setLayout(new GridLayout());
-        panel.add(button);
-        panel.add(label);
-        panel.add(tip);
-
-
-
-        frame.add(panel, BorderLayout.CENTER);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("huh");
-        frame.pack();
-        frame.setVisible(true);
-
-
-        if (tip.equals(true)) {
-            System.out.println("huh2");
-        }
-    }
-    public static void main(String[] args ){
-
-    }
-
-
-*/
-// lil gui stuff wrong file type might use it later
