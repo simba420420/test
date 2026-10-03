@@ -1,0 +1,950 @@
+import java.util.*;
+
+public class Example2 {
+
+
+
+    static class GameState {
+
+        double hp = 90;
+        double enemyHp = 120;
+        double damage = 10;
+
+        int buff = 0;
+        int buff2 = 0;
+        int miss = 0;
+        int axes = 0;
+
+        boolean shield = false;
+        boolean tankMode = false;
+
+        // 0 = normal
+        // 1 = delayed attack waiting
+        int nextTurn = 0;
+
+        double delayedDamage = 0;
+
+        String playerClass = "";
+    }
+
+
+
+
+    public static void main(String[] args) {
+        menu();
+    }
+
+
+
+    public static void menu() {
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("user?");
+        String userName = scan.nextLine();
+
+        if (userName.equals("s")) {
+            rpg_Fight();
+        }
+        else {
+            System.out.println("hello " + userName);
+            System.out.println("what action would you like to do?");
+            System.out.println("type play to start the game or type credits to see credits");
+            String action = scan.nextLine();
+            if (action.equals("play")) {
+                rpg_Fight();
+            }
+            else if (action.equals("credits")) {
+                System.out.println("chat gpt");
+                System.out.println("levi warner");
+                System.out.println("eden");
+            }
+        }
+    }
+
+
+
+    public static void rpg_Fight() {
+
+        Scanner scan = new Scanner(System.in);
+
+        GameState game = new GameState();
+
+        ArrayList<String> mv = new ArrayList<String>();
+
+        System.out.println();
+        System.out.println("THIS IS A RPG");
+        System.out.println("There are 5 classes");
+        System.out.println("1: mage");
+        System.out.println("2: bandit");
+        System.out.println("3: archer");
+        System.out.println("4: bersker");
+        System.out.println("5: tank");
+        System.out.println();
+        System.out.println("Type the name of what you want to be");
+
+
+        while (true) {
+
+            String ch2 = scan.nextLine().toLowerCase();
+
+            if (ch2.equals("mage")) {
+
+                game.playerClass = "mage";
+
+                mv.add("over head spears");
+                mv.add("auto shields");
+                mv.add("pure magic");
+                mv.add("bless me gods");
+
+                System.out.println();
+                System.out.println("Your new moves as a mage are:");
+                System.out.println("1: over head spears");
+                System.out.println("2: auto shields");
+                System.out.println("3: pure magic");
+                System.out.println("4: bless me gods");
+
+                break;
+            }
+            else if (ch2.equals("bandit")) {
+
+                game.playerClass = "bandit";
+
+                mv.add("speed blitz");
+                mv.add("song");
+                mv.add("rock throw");
+                mv.add("dodge");
+
+                System.out.println();
+                System.out.println("Your new moves as a bandit are:");
+                System.out.println("1: speed blitz");
+                System.out.println("2: song");
+                System.out.println("3: rock throw");
+                System.out.println("4: dodge");
+
+                break;
+            }
+            else if (ch2.equals("archer")) {
+
+                game.playerClass = "archer";
+
+                mv.add("longbow");
+                mv.add("rapid shots");
+                mv.add("explosive shot");
+                mv.add("homing arrows");
+
+                System.out.println();
+                System.out.println("Your new moves as an archer are:");
+                System.out.println("1: longbow");
+                System.out.println("2: rapid shots");
+                System.out.println("3: explosive shot");
+                System.out.println("4: homing arrows");
+
+                break;
+            }
+            else if (ch2.equals("bersker")) {
+
+                game.playerClass = "bersker";
+
+                mv.add("wild strikes");
+                mv.add("axe throw");
+                mv.add("bersker rage");
+                mv.add("heavy blow");
+
+                System.out.println();
+                System.out.println("Your new moves as a bersker are:");
+                System.out.println("1: wild strikes");
+                System.out.println("2: axe throw");
+                System.out.println("3: bersker rage");
+                System.out.println("4: heavy blow");
+
+                break;
+            }
+            else if (ch2.equals("tank")) {
+
+                game.playerClass = "tank";
+
+                game.hp = 170;
+
+                mv.add("fall");
+                mv.add("laugh");
+                mv.add("punch");
+                mv.add("getting real");
+
+                System.out.println();
+                System.out.println("Your new moves as a tank are:");
+                System.out.println("1: fall");
+                System.out.println("2: laugh");
+                System.out.println("3: punch");
+                System.out.println("4: getting real");
+
+                break;
+            }
+
+
+            else {
+
+                System.out.println(
+                        "Sorry, that is not a class. Please choose a class."
+                );
+            }
+        }
+        System.out.println();
+        System.out.println("You find yourself in a dark alley.");
+        System.out.println("You stumble out of the alley and meet a knight.");
+        System.out.println("He asks you to duel.");
+        System.out.println("Do you accept?");
+        System.out.println("Y/n");
+
+
+        String ch1 = scan.nextLine().toLowerCase();
+
+
+        if (ch1.equals("yes") || ch1.equals("y")) {
+
+            System.out.println();
+            System.out.println("The knight has " + game.enemyHp + " HP.");
+            System.out.println("You have " + game.hp + " HP.");
+
+            System.out.println();
+            System.out.println("Your moves are:");
+
+            for (int i = 0; i < mv.size(); i++) {
+                System.out.println((i + 1) + ": " + mv.get(i));
+            }
+
+            System.out.println();
+            System.out.println("Type 'start' to begin.");
+
+            while (true) {
+
+                String move = scan.nextLine().toLowerCase();
+
+                if (move.equals("info")) {
+
+                    System.out.println();
+                    System.out.println("Your moves:");
+
+                    for (int i = 0; i < mv.size(); i++) {
+                        System.out.println((i + 1) + ": " + mv.get(i));
+                    }
+
+                }
+
+                else if (move.equals("start")) {
+
+                    turncalc(game);
+
+                    break;
+                }
+
+                else {
+
+                    System.out.println(
+                            "Type 'info' or 'start'"
+                    );
+                }
+            }
+        }
+
+        else {
+
+            System.out.println("You walked away from the knight.");
+        }
+    }
+    public static void turncalc(GameState game) {
+
+        Scanner scan = new Scanner(System.in);
+
+        int turn = 1;
+
+
+        while (game.hp > 0 && game.enemyHp > 0) {
+
+            System.out.println();
+            System.out.println("==============================");
+            System.out.println("TURN " + turn);
+            System.out.println("==============================");
+
+            System.out.println(
+                    "Your HP: " + game.hp
+            );
+
+            System.out.println(
+                    "Knight HP: " + game.enemyHp
+            );
+
+            System.out.println();
+            if (game.nextTurn == 1) {
+
+                System.out.println(
+                        "Your delayed attack activates!"
+                );
+
+                game.enemyHp -= game.delayedDamage;
+
+                System.out.println(
+                        "It dealt " +
+                                game.delayedDamage +
+                                " damage!"
+                );
+
+                game.delayedDamage = 0;
+
+                game.nextTurn = 0;
+            }
+
+            else {
+
+                System.out.println(
+                        "What is your move?"
+                );
+
+                String move = scan.nextLine().toLowerCase();
+
+                magedmg(game, move);
+            }
+
+            if (game.enemyHp <= 0) {
+
+                game.enemyHp = 0;
+
+                System.out.println();
+                System.out.println("==============================");
+                System.out.println("YOU WIN!");
+                System.out.println("==============================");
+
+                break;
+            }
+            System.out.println();
+            System.out.println("The knight attacks!");
+
+            edmgg(game);
+            if (game.hp <= 0) {
+
+                game.hp = 0;
+
+                System.out.println();
+                System.out.println("==============================");
+                System.out.println("YOU DIED!");
+                System.out.println("==============================");
+
+                System.out.println("Would you like to try again?");
+                System.out.println("Y/n");
+
+                String answer = scan.nextLine().toLowerCase();
+
+                if (answer.equals("y")) {
+
+                    rpg_Fight();
+
+                }
+
+                break;
+            }
+
+
+            turn++;
+        }
+    }
+    public static void magedmg(GameState game, String move) {
+
+        System.out.println();
+        System.out.println("You are using " + move);
+        if (game.playerClass.equals("mage")) {
+            if (move.equals("over head spears") ||
+                    move.equals("1")) {
+
+                double damage = game.damage + 5;
+
+                game.enemyHp -= damage;
+
+                System.out.println(
+                        "Over head spears dealt " +
+                                damage +
+                                " damage!"
+                );
+            }
+            else if (move.equals("auto shields") ||
+                    move.equals("2")) {
+
+                if (game.shield) {
+
+                    System.out.println(
+                            "You already used auto shields!"
+                    );
+
+                }
+                else {
+
+                    game.hp += 40;
+
+                    game.shield = true;
+
+                    System.out.println(
+                            "You gained 40 HP!"
+                    );
+                }
+            }
+            else if (move.equals("pure magic") ||
+                    move.equals("3")) {
+
+                double damage = game.damage + 15;
+
+                game.enemyHp -= damage;
+
+                System.out.println(
+                        "Pure magic dealt " +
+                                damage +
+                                " damage!"
+                );
+            }
+
+            else if (move.equals("bless me gods") ||
+                    move.equals("4")) {
+
+                if (game.buff >= 10) {
+
+                    System.out.println(
+                            "You cannot use this buff anymore."
+                    );
+
+                }
+                else {
+
+                    game.damage *= 1.1;
+
+                    game.buff++;
+
+                    System.out.println(
+                            "Your damage increased by 10%!"
+                    );
+                }
+            }
+
+
+            else {
+
+                System.out.println("That is not a mage move.");
+            }
+        }
+        else if (game.playerClass.equals("bandit")) {
+            if (move.equals("speed blitz") ||
+                    move.equals("1")) {
+
+                double damage = game.damage - 5;
+
+                if (damage < 1) {
+                    damage = 1;
+                }
+
+                double totalDamage = damage * 3;
+
+                game.enemyHp -= totalDamage;
+
+                System.out.println(
+                        "Speed blitz hit 3 times!"
+                );
+
+                System.out.println(
+                        "Total damage: " + totalDamage
+                );
+            }
+            else if (move.equals("song") ||
+                    move.equals("2")) {
+
+                if (game.buff >= 1) {
+
+                    System.out.println(
+                            "You already used Song."
+                    );
+                }
+                else {
+
+                    game.damage *= 1.3;
+
+                    game.buff++;
+
+                    System.out.println(
+                            "Your damage increased by 1.3x!"
+                    );
+
+                    System.out.println(
+                            "You will also take more damage."
+                    );
+                }
+            }
+            else if (move.equals("rock throw") ||
+                    move.equals("3")) {
+
+                System.out.println(
+                        "You threw a rock into the air!"
+                );
+
+                System.out.println(
+                        "It will hit next turn for 20 damage."
+                );
+
+                game.nextTurn = 1;
+
+                game.delayedDamage = 20;
+            }
+            else if (move.equals("dodge") ||
+                    move.equals("4")) {
+
+                game.shield = true;
+
+                System.out.println(
+                        "You will dodge the next attack!"
+                );
+            }
+
+
+            else {
+
+                System.out.println(
+                        "That is not a bandit move."
+                );
+            }
+        }
+        else if (game.playerClass.equals("archer")) {
+            if (move.equals("longbow") ||
+                    move.equals("1")) {
+
+                double damage = game.damage + 25;
+
+                game.enemyHp -= damage;
+
+                System.out.println(
+                        "Longbow dealt " +
+                                damage +
+                                " damage!"
+                );
+            }
+            else if (move.equals("rapid shots") ||
+                    move.equals("2")) {
+
+                double damage = game.damage - 5;
+
+                if (damage < 1) {
+                    damage = 1;
+                }
+
+                double totalDamage = damage * 5;
+
+                game.enemyHp -= totalDamage;
+
+                System.out.println(
+                        "Rapid shots hit 5 times!"
+                );
+
+                System.out.println(
+                        "Total damage: " +
+                                totalDamage
+                );
+            }
+            else if (move.equals("explosive shot") ||
+                    move.equals("3")) {
+
+                double damage = game.damage + 15;
+
+                game.enemyHp -= damage;
+
+                System.out.println(
+                        "Explosive shot dealt " +
+                                damage +
+                                " damage!"
+                );
+
+                int explosionChance =
+                        (int)(Math.random() * 10) + 1;
+
+                if (explosionChance <= 3) {
+
+                    double selfDamage = damage / 2;
+
+                    game.hp -= selfDamage;
+
+                    System.out.println(
+                            "The explosion hit you for " +
+                                    selfDamage +
+                                    " damage!"
+                    );
+                }
+            }
+            else if (move.equals("homing arrows") ||
+                    move.equals("4")) {
+
+                System.out.println(
+                        "The homing arrow will return next turn!"
+                );
+
+                game.nextTurn = 1;
+
+                game.delayedDamage = 20;
+            }
+
+
+            else {
+
+                System.out.println(
+                        "That is not an archer move."
+                );
+            }
+        }
+        else if (game.playerClass.equals("bersker")) {
+            if (move.equals("wild strikes") ||
+                    move.equals("1")) {
+
+                double damage =
+                        game.damage + 6.666;
+
+                double totalDamage =
+                        damage * 3;
+
+                game.enemyHp -= totalDamage;
+
+                System.out.println(
+                        "Wild strikes hit 3 times!"
+                );
+
+                System.out.println(
+                        "Total damage: " +
+                                totalDamage
+                );
+            }
+            else if (move.equals("axe throw") ||
+                    move.equals("2")) {
+
+                int chance =
+                        (int) (Math.random() * 3) + 1;
+
+                if (game.miss == 1) {
+
+                    chance =
+                            (int) (Math.random() * 2) + 1;
+                }
+
+
+                if (chance == 1) {
+
+                    System.out.println(
+                            "Your axe missed!"
+                    );
+
+                    System.out.println(
+                            "The knight picked up your axe!"
+                    );
+
+                } else {
+
+                    double damage =
+                            game.damage + 25;
+
+                    game.enemyHp -= damage;
+
+                    System.out.println(
+                            "Your axe hit for " +
+                                    damage +
+                                    " damage!"
+                    );
+                }
+            }
+            else if (move.equals("bersker rage") ||
+                    move.equals("3")) {
+
+                if (game.buff >= 1) {
+
+                    System.out.println(
+                            "You already used Berserker Rage!"
+                    );
+
+                }
+                else {
+
+                    game.miss = 1;
+
+                    game.damage += 15;
+
+                    game.buff++;
+
+                    System.out.println(
+                            "YOU ARE ENRAGED!"
+                    );
+
+                    System.out.println(
+                            "You deal +15 damage."
+                    );
+
+                    System.out.println(
+                            "You have a higher chance to miss."
+                    );
+                }
+            }
+            else if (move.equals("heavy blow") ||
+                    move.equals("4")) {
+
+                if (game.miss == 1) {
+
+                    double damage =
+                            game.damage + 25;
+
+                    game.enemyHp -= damage;
+
+                    System.out.println(
+                            "Heavy blow dealt " +
+                                    damage +
+                                    " damage!"
+                    );
+
+                }
+                else {
+
+                    System.out.println(
+                            "You need Berserker Rage first!"
+                    );
+                }
+            }
+
+
+            else {
+
+                System.out.println(
+                        "That is not a berserker move."
+                );
+            }
+        }
+        else if (game.playerClass.equals("tank")) {
+            if (move.equals("fall")) {
+
+                game.enemyHp -= game.damage;
+
+                System.out.println(
+                        "You fell on them for " +
+                                game.damage +
+                                " damage!"
+                );
+            }
+            else if (move.equals("laugh")) {
+
+                if (game.buff < 3) {
+
+                    game.hp += 10;
+
+                    game.buff++;
+
+                    System.out.println(
+                            "You laughed and gained 10 HP!"
+                    );
+                }
+                else {
+
+                    System.out.println(
+                            "You can only use Laugh 3 times."
+                    );
+                }
+            }
+            else if (move.equals("punch")) {
+
+                game.enemyHp -= game.damage;
+
+                System.out.println(
+                        "You punched them for " +
+                                game.damage +
+                                " damage!"
+                );
+            }
+            else if (move.equals("getting real")) {
+
+                game.tankMode = true;
+
+                System.out.println();
+                System.out.println(
+                        "GETTING REAL!"
+                );
+
+                System.out.println(
+                        "You unlocked:"
+                );
+
+                System.out.println("bash");
+                System.out.println("stonewall");
+                System.out.println("glare");
+                System.out.println("calming music");
+            }
+
+            else if (move.equals("bash") &&
+                    game.tankMode) {
+
+                double damage =
+                        game.damage + 10;
+
+                game.enemyHp -= damage;
+
+                System.out.println(
+                        "Bash dealt " +
+                                damage +
+                                " damage!"
+                );
+            }
+            else if (move.equals("stonewall") &&
+                    game.tankMode) {
+
+                game.hp += 50;
+
+                System.out.println(
+                        "Stonewall gave you 50 HP!"
+                );
+            }
+            else if (move.equals("glare") &&
+                    game.tankMode) {
+
+                System.out.println(
+                        "The knight is intimidated!"
+                );
+
+                System.out.println(
+                        "The knight will deal less damage."
+                );
+
+                game.damage -= 5;
+
+                if (game.damage < 1) {
+                    game.damage = 1;
+                }
+            }
+            else if (move.equals("calming music") &&
+                    game.tankMode) {
+
+                System.out.println(
+                        "The music calmed you down."
+                );
+
+                game.miss = 0;
+            }
+
+
+            else {
+
+                System.out.println(
+                        "That is not a tank move."
+                );
+            }
+        }
+
+        if (game.enemyHp < 0) {
+            game.enemyHp = 0;
+        }
+
+        if (game.hp < 0) {
+            game.hp = 0;
+        }
+
+
+        System.out.println();
+        System.out.println(
+                "Knight HP: " + game.enemyHp
+        );
+
+        System.out.println(
+                "Your HP: " + game.hp
+        );
+    }
+    public static void edmgg(GameState game) {
+
+        int effectChance =
+                (int)(Math.random() * 15) + 1;
+
+        int buffChance =
+                (int)(Math.random() * 10) + 1;
+
+
+        double enemyDamage =
+                (int)(Math.random() * 2.5 + 20);
+
+
+        // Random damage effect
+        if (buffChance == 1) {
+
+            enemyDamage =
+                    enemyDamage / 2.3;
+
+            enemyDamage =
+                    enemyDamage * 1.5;
+
+            System.out.println(
+                    "The knight used a special attack!"
+            );
+        }
+        if (game.shield) {
+
+            System.out.println(
+                    "You blocked the knight's attack!"
+            );
+
+            game.shield = false;
+
+            return;
+        }
+
+        if (game.playerClass.equals("bandit") &&
+                game.buff >= 1) {
+
+            enemyDamage *= 1.5;
+
+            System.out.println(
+                    "Your Song buff caused you to take extra damage."
+            );
+        }
+        if (game.playerClass.equals("bersker") &&
+                game.miss == 1) {
+
+            int missChance =
+                    (int)(Math.random() * 4) + 1;
+
+            if (missChance == 1) {
+
+                System.out.println(
+                        "The knight attacked, but missed!"
+                );
+
+                return;
+            }
+        }
+        game.hp -= enemyDamage;
+
+
+        System.out.println(
+                "They hit you for " +
+                        enemyDamage +
+                        " damage."
+        );
+        if (effectChance == 1) {
+
+            double reflected =
+                    enemyDamage / 2;
+
+            game.enemyHp -= reflected;
+
+            System.out.println(
+                    "You reflected " +
+                            reflected +
+                            " damage!"
+            );
+        }
+
+
+        if (game.hp < 0) {
+            game.hp = 0;
+        }
+
+        if (game.enemyHp < 0) {
+            game.enemyHp = 0;
+        }
+
+
+        System.out.println(
+                "Your HP: " + game.hp
+        );
+    }
+}
