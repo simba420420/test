@@ -1,0 +1,68 @@
+import java.util.*;
+class Main {
+    public static void main(String[] args) {
+            fuckyou();
+        }
+
+    public static void fuckyou() {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("hello would you like to gamble?:  ");
+            String anw = scan.nextLine();
+                int g1 = (int)(Math.random() * 7) + 1;
+                int g2 = (int)(Math.random() * 7) + 1;
+                int g3 = (int)(Math.random() * 7) + 1;
+                if (anw.equals("yes")){
+                    if (g1 < 6) {
+                        System.out.println("aww you got a unlucky " + g1);
+                }
+                    else if (g1 >= 6) {
+                        System.out.println("you got a lucky " + g1);
+                    }
+                    System.out.println("to pull the lever just put in the word 'spin' in and press enter");
+                        String lever = scan.nextLine();
+                    if (lever.equals("spin")) {
+                        if (g2 < 6) {
+                            System.out.println("aww you got a unlucky " + g2);
+                        }
+                        if (g2 >= 6 ) {
+                            System.out.println("you got a lucky " + g2);
+                        }
+                    }
+                    System.out.println("to pull the lever just put in the word 'spin' in and press enter");
+                        String lever2 = scan.nextLine();
+                    if (lever2.equals("spin")) {
+                        if (g3 < 6) {
+                            System.out.println("aww you got a unlucky " + g3);
+                        }
+                         if (g3 >= 6) {
+                             System.out.println("you got a lucky " + g3);
+                         }
+                    }
+            int g4 = g1 + g2 + g3;
+            if (g4 == 18) {
+                System.out.println("you won");
+                System.out.println("would you like to play again (yes or no)");
+                String anw2 = scan.nextLine();
+                if (anw2.equals("yes")){
+                    main(new String[0]);
+            }
+                else; 
+                System.exit(0);
+        }
+            else;
+                System.out.println("sorry you lost");
+                System.out.println("would you like to play again (yes or no)");
+                String anw2 = scan.nextLine();
+                if (anw2.equals("yes")){
+                    main(new String[0]);
+            }
+                else;
+                    System.exit(0);
+                    
+            }
+    }
+    }
+          
+
+    
+
